@@ -1,5 +1,8 @@
 #!/bin/bash
 
+trap 'echo -e "\n❌ Ocorreu um erro durante a execução do script. Abortando."; exit 1' ERR
+set -e
+
 if ! command -v conan &> /dev/null
 then
     echo "Conan não encontrado. Por favor, instale o Conan."
