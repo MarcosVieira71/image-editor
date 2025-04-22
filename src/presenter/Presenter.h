@@ -1,5 +1,6 @@
 #pragma once
-#include "view/ImageView.h"
+#include "view/IImageView.h"
+#include <memory>
 
 class ImageModel;
 
@@ -7,12 +8,12 @@ class Presenter{
 
     public:
         Presenter() = delete;
-        Presenter(ImageView* view, ImageModel* model);
+        Presenter(IImageView& view, ImageModel* model);
         void initialize();
     
     private:
-
-        ImageView* m_view;
+        void mock(const std::string& file);
+        IImageView* m_view;
         ImageModel* m_model;
 
 };

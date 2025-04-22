@@ -3,6 +3,8 @@ project(EditorImagem)
 
 include(${CMAKE_BINARY_DIR}/conan/conan_toolchain.cmake)
 
+set(CMAKE_AUTOMOC ON)
+
 set(CMAKE_CXX_STANDARD 17)
 
 include(srcfiles.cmake)
