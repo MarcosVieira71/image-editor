@@ -16,7 +16,7 @@ class ImageView: public QObject, public IImageView {
     Q_OBJECT
     public:
         ImageView();
-        void displayImage(unsigned char* data, int width, int height, int channels) override;
+        void displayImage(const unsigned char* data, int width, int height, int channels) override;
         void show() override;
         void setOnOpenFileCallback(std::function<void(const std::string&)>) override; 
 

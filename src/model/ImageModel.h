@@ -1,7 +1,14 @@
 #pragma once
 
 #include "stb_image.h"
+#include <memory>
 #include <string>
+
+struct ImageDeleter{
+    void operator()(unsigned char* ptr) const{
+        stbi_image_free(ptr);
+    }
+};
 
 class ImageModel{
     public:
@@ -10,10 +17,10 @@ class ImageModel{
         int getWidth() const;
         int getChannels() const;
         int getHeight() const;
-        unsigned char* getData() const;
+        const unsigned char* getData() const;
 
     private:
-        unsigned char* data;
+        std::unique_ptr<unsigned char, ImageDeleter> data;
         int m_width, m_height, m_channels;
 };
 

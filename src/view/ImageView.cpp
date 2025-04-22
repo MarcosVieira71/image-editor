@@ -11,7 +11,7 @@ ImageView::ImageView(){
 }
 
 
-void ImageView::displayImage(unsigned char* data, int width, int height, int channels){
+void ImageView::displayImage(const unsigned char* data, int width, int height, int channels){
     QImage::Format format;
     switch (channels) {
         case 1: format = QImage::Format_Grayscale8; break;

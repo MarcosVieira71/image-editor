@@ -18,11 +18,13 @@ int ImageModel::getHeight() const{
     return m_height;
 }
 
-unsigned char* ImageModel::getData() const{
-    return data;
+const unsigned char* ImageModel::getData() const{
+    return data.get();
 }
 
 void ImageModel::loadImage(const std::string& filepath){
-    data = stbi_load(filepath.c_str(), &m_width, &m_height, &m_channels, 0);
+
+    auto rawData = stbi_load(filepath.c_str(), &m_width, &m_height, &m_channels, 0);
+    data.reset(rawData);
 
 }
