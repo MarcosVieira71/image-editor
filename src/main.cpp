@@ -18,9 +18,9 @@ int main(int argc, char *argv[]) {
 
     auto view = ImageView();
     auto model = ImageModel();
-    auto presenter = std::make_unique<Presenter>(view, &model);
+    auto presenter = std::make_unique<Presenter>(view, model);
     
     presenter->initialize();
-    
+
     return app.exec();
 }

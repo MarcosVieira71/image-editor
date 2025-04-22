@@ -4,8 +4,26 @@
 
 ImageView::ImageView(){
     loadUi();
-    QAction* openFileAction = m_window->findChild<QAction*>("openFileAction");
-    QObject::connect(openFileAction, &QAction::triggered, this, &ImageView::onOpenFileTriggered);
+    m_imageLabel = m_window->findChild<QLabel*>("ImageLabel");
+
+    m_openFileAction = m_window->findChild<QAction*>("openFileAction");
+    QObject::connect(m_openFileAction, &QAction::triggered, this, &ImageView::onOpenFileTriggered);
+}
+
+
+void ImageView::displayImage(unsigned char* data, int width, int height, int channels){
+    QImage::Format format;
+    switch (channels) {
+        case 1: format = QImage::Format_Grayscale8; break;
+        case 3: format = QImage::Format_RGB888; break;
+        case 4: format = QImage::Format_RGBA8888; break;
+        default:
+            std::cerr << "Número de canais não suportado: " << channels << std::endl;
+            return;
+    }
+
+    QImage image(data, width, height, width * channels, format);
+    m_imageLabel->setPixmap(QPixmap::fromImage(image));
 }
 
 void ImageView::loadUi(){
