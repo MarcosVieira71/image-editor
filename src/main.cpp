@@ -5,18 +5,24 @@
 #include <QPushButton>
 #include <QOpenGLWidget>
 
+#include <memory>
+#include "presenter/Presenter.h"
+#include "model/ImageModel.h"
+#include "view/ImageView.h"
+
+#include <iostream>
 
 int main(int argc, char *argv[]) {
+
     QApplication app(argc, argv);
 
-    QFile file("../ui/MainWindowImage.ui");
+    auto view = ImageView();
+    auto model = ImageModel();
+    auto presenter = std::make_unique<Presenter>(&view, &model);
+    
+    presenter->initialize();
+    printf("oi\n");
+    
 
-
-    QUiLoader loader;
-    QWidget *window = loader.load(&file);
-
-    file.close();
-
-    window->show();
     return app.exec();
 }

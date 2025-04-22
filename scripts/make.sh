@@ -10,13 +10,17 @@ then
 fi
 mkdir -p build
 
-echo "Instalando dependências com o Conan..."
-conan install . --build=missing  -of=build/conan
+if [ ! -d "build/conan" ]; then
+    echo "Instalando dependências com o Conan..."
+    conan install . --build=missing -of=build/conan
+else
+    echo "Dependências já instaladas. Pulando o passo de instalação."
+fi
 
 cd build
 
 echo "Configurando o CMake..."
-cmake -DCMAKE_TOOLCHAIN_FILE=conan/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_TOOLCHAIN_FILE=conan/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release .. > /dev/null 2>&1
 
 echo "Compilando o projeto..."
 cmake --build .

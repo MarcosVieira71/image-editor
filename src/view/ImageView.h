@@ -1,21 +1,21 @@
+#pragma once
+
 #include <QApplication>
 #include <QWidget>
 #include <QUiLoader>
 #include <QFile>
+#include <QWidget>
 
 class ImageView{
 
     public:
-        ImageView(){
-
-            QFile file("ui/MainWindowImage.ui");
-
-            QUiLoader loader;
-            QWidget *window = loader.load(&file);
-
-            file.close();
-        }
+        ImageView();
+        void show();
 
     private:
+        void loadUi();
+        
+        QWidget* m_window;
+        
 
 };

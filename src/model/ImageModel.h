@@ -1,9 +1,11 @@
+#pragma once
+
 #include "stb_image.h"
 #include <string>
 
 class ImageModel{
     public:
-        ImageModel();
+        int k;
     private:
         unsigned char* data;
 };

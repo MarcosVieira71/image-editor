@@ -1,17 +1,18 @@
-class ImageView;
+#pragma once
+#include "view/ImageView.h"
+
 class ImageModel;
 
 class Presenter{
 
-    Presenter() = delete;
-    Presenter(ImageView* view, ImageModel* model);
-
     public:
-
+        Presenter() = delete;
+        Presenter(ImageView* view, ImageModel* model);
+        void initialize();
     
     private:
 
-        ImageView* view;
-        ImageModel* model;
+        ImageView* m_view;
+        ImageModel* m_model;
 
 };
