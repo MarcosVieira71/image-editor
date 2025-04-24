@@ -5,9 +5,12 @@
 ImageView::ImageView(){
     loadUi();
     m_imageLabel = m_window->findChild<QLabel*>("ImageLabel");
-
+    m_negativeRadioButton = m_window->findChild<QRadioButton*>("negativeRadio");
     m_openFileAction = m_window->findChild<QAction*>("openFileAction");
     QObject::connect(m_openFileAction, &QAction::triggered, this, &ImageView::onOpenFileTriggered);
+    QObject::connect(m_negativeRadioButton, &QRadioButton::toggled, this, &ImageView::onRadioButtonToggled);
+
+
 }
 
 
@@ -48,8 +51,18 @@ void ImageView::onOpenFileTriggered() {
     } 
 }
 
+void ImageView::onRadioButtonToggled(bool checked){
+    if(checked){
+        m_negativeButtonCallback(checked);
+    }
+}
+
 void ImageView::setOnOpenFileCallback(std::function<void(const std::string&)> callback){
     m_openFileCallback = std::move(callback);
+}
+
+void ImageView::setNegativeButtonCallback(std::function<void(bool)> callback){
+    m_negativeButtonCallback = std::move(callback);
 }
 
 

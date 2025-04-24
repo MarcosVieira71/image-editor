@@ -18,9 +18,12 @@ class ImageModel{
         int getChannels() const;
         int getHeight() const;
         const unsigned char* getData() const;
+        unsigned char& pixel(int x, int y, int channel);
+        void applyNegativeFilter();
+
 
     private:
-        std::unique_ptr<unsigned char, ImageDeleter> data;
+        std::unique_ptr<unsigned char, ImageDeleter> m_data;
         int m_width, m_height, m_channels;
 };
 
